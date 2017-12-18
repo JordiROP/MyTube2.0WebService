@@ -14,10 +14,8 @@ public class PostgreSQLJDBC {
 
     public void openConnection() {
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/mytube2",
-                            "postgres", "postgres");
+            String dbURL = "jdbc:postgresql://localhost:5432/mytube2?user=postgres&password=postgres";
+            c = DriverManager.getConnection(dbURL);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("problem opening the connection");
@@ -58,7 +56,7 @@ public class PostgreSQLJDBC {
         Statement stmt;
         try {
             stmt = c.createStatement();
-            String sql = "SELECT * FROM user WHERE id = "+id+";";
+            String sql = "SELECT * FROM mytube_user WHERE id = "+id+";";
             ResultSet rs =stmt.executeQuery(sql);
             UserBO userBO = new UserBO();
             while (rs.next()) {
