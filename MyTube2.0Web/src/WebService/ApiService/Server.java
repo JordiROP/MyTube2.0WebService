@@ -19,16 +19,9 @@ public class Server {
     @Path("/server/{serverID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ServerBO getServerInfo(@PathParam("serverID") String serverID){
+    public ServerBO getServerInfo(@PathParam("serverID") int serverID){
         return serverDAO.getServerByID(serverID);
     }
 
-    @Path("/server/{serverID}/{content}")
-    @GET
-    //Si volem XML tmb es pot
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getAllContent(@PathParam("serverID") String serverID, @PathParam("content") String content){
-
-        return null;
-    }
+    
 }

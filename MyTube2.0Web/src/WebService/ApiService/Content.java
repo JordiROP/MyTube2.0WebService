@@ -50,10 +50,19 @@ public class Content {
      * @param userID
      * @return
      */
-    @Path("/{userID}/contents")
+    @Path("/content/{userID}")
     @GET
     @Produces("application/json")
     public List<ContentBO> getcontentsFromUser(@PathParam("userID") String userID) {
+        return null;
+    }
+    
+    @Path("/{contentID}/server")
+    @GET
+    //Si volem XML tmb es pot
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllContent(@PathParam("contentID") String contentID){
+
         return null;
     }
 

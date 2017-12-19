@@ -1,17 +1,17 @@
 package WebService.DAO;
 
 import WebService.BO.UserBO;
-import WebService.JDBC.PostgreSQLJDBC;
+import WebService.JDBC.UserJDBC;
 
 public class UserDAO {
 
-    private static PostgreSQLJDBC postrgres = new PostgreSQLJDBC();
+    private static UserJDBC postrgres = new UserJDBC();
 
     public int insertNewUser(UserBO userBo){
-        return postrgres.insertNewUser(userBo);
+        return postrgres.insert(userBo);
     }
     
     public UserBO getUserById(int id){
-		return postrgres.getUserById(id);
+		return postrgres.getById(id);
     }
 }

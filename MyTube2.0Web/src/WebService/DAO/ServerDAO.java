@@ -1,14 +1,13 @@
 package WebService.DAO;
 
 import WebService.BO.ServerBO;
-import WebService.JDBC.PostgreSQLJDBC;
+import WebService.JDBC.ServerJDBC;
 
 public class ServerDAO {
 
-    private static PostgreSQLJDBC postgres = new PostgreSQLJDBC();
+    private static ServerJDBC postgres = new ServerJDBC();
 
-	public ServerBO getServerByID(String serverID) {
-		return postgres.getServerByID(serverID);
-		
+	public ServerBO getServerByID(int serverID) {
+		return postgres.getById(serverID);
 	}
 }
