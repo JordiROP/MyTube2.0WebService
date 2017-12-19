@@ -17,9 +17,7 @@ public class User{
     UserDAO userDao = new UserDAO();
     
     /**
-     * get the information of the user by the userID.
-     * @param userID
-     * @return the user who has the userID param.
+     * listAll the list of all users.
      */
     @Path("/")
     @GET

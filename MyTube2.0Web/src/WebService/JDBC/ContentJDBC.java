@@ -26,6 +26,24 @@ public class ContentJDBC extends PostgreSQLJDBC{
 	private List<ContentBO> selectQuery() {
 		return selectQuery("1=1");
 	}
+	
+	public int insert(ContentBO contentBO) {
+		openConnection();
+        Statement stmt;
+        try {
+            stmt = c.createStatement();
+            String sql = "INSERT INTO mytube_content (title, description, user_id, server_id) "
+                    + "VALUES ('"+contentBO.getTitle()+"', '"+contentBO.getDescription()+"', '"+contentBO.getUploader()+"', '"+contentBO.getServerId()+"');";
+            stmt.executeUpdate(sql);
+            			
+            closeConnection();
+        } catch (SQLException e) {
+            System.err.println("problem executing the query");
+            closeConnection();
+        }
+        return getNewstContentID();
+	}
+
 
 	private List<ContentBO> selectQuery(String whereConditions) {
 		openConnection();
@@ -33,7 +51,7 @@ public class ContentJDBC extends PostgreSQLJDBC{
         List<ContentBO> contents = new ArrayList<>();
         try {
             stmt = c.createStatement();
-            String sql = "SELECT * FROM content WHERE "+whereConditions+";";
+            String sql = "SELECT * FROM mytube_content WHERE "+whereConditions+";";
             ResultSet rs =stmt.executeQuery(sql);
             while (rs.next()) {
             	ContentBO contentBO = new ContentBO();
@@ -52,6 +70,27 @@ public class ContentJDBC extends PostgreSQLJDBC{
         }
         return contents;
 	}
+
+	private int getNewstContentID(){
+    	int id = -1;
+    	openConnection();
+        Statement stmt;
+        try {
+        	stmt = c.createStatement();
+        	String sql = "SELECT timestamp,id FROM mytube_content order by timestamp desc limit 1";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+            	id = rs.getInt("id");
+            }
+            closeConnection();
+            
+
+        } catch (SQLException e) {
+            System.err.println("problem executing the query");
+            closeConnection();
+        }
+        return id;
+    }
 
 	
 }

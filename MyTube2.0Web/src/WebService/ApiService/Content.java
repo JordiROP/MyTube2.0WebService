@@ -16,7 +16,6 @@ import javax.ws.rs.core.Response;
 
 import WebService.BO.ContentBO;
 import WebService.DAO.ContentDAO;
-import WebService.RestBean.BeanJson;
 
 @Path("/content")
 public class Content {
@@ -31,10 +30,9 @@ public class Content {
 
     @Path("/content")
     @POST
-    public Response uploadContent(BeanJson bean){
-        /*String resultat = bean.getNom();
-        return Response.status(201).entity(resultat).build();*/
-        return null;
+    public int uploadContent(ContentBO contentBO){
+    	 int result = contentDAO.insertNewCotent(contentBO);
+         return result;
     }
 
     @Path("/content/{contentID}")

@@ -9,6 +9,11 @@ import java.util.List;
 import WebService.BO.ServerBO;
 
 public class ServerJDBC extends PostgreSQLJDBC{
+	
+	public List<ServerBO> getAll() {
+		return selectQuery();
+	}
+	
 	public ServerBO getById(int id){
     	return selectQuery("id="+String.valueOf(id)).get(0);
     }
@@ -18,7 +23,7 @@ public class ServerJDBC extends PostgreSQLJDBC{
         Statement stmt;
         try {
             stmt = c.createStatement();
-            String sql = "INSERT INTO server (host, port) "
+            String sql = "INSERT INTO mytube_server (host, port) "
                     + "VALUES ('"+serverBO.getHost()+"', '"+serverBO.getPort()+"');";
             stmt.executeUpdate(sql);
             			
@@ -36,10 +41,10 @@ public class ServerJDBC extends PostgreSQLJDBC{
         Statement stmt;
         try {
         	stmt = c.createStatement();
-        	String sql = "SELECT timestamp,server_id from server order by timestamp desc limit 1";
+        	String sql = "SELECT timestamp,id from server order by timestamp desc limit 1";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-            	id = rs.getInt("server_id");
+            	id = rs.getInt("id");
             }
             closeConnection();
             
@@ -51,13 +56,17 @@ public class ServerJDBC extends PostgreSQLJDBC{
         return id;
     }
 	
+	private List<ServerBO> selectQuery(){
+		return selectQuery("1=1");
+	}
+	
 	private List<ServerBO> selectQuery(String whereConditions) {
 		openConnection();
         Statement stmt;
         List<ServerBO> servers = new ArrayList<>();
         try {
         	stmt = c.createStatement();
-            String sql = "SELECT * FROM server WHERE "+whereConditions+";";
+            String sql = "SELECT * FROM mytube_server WHERE "+whereConditions+";";
             ResultSet rs =stmt.executeQuery(sql);
             
             while (rs.next()) {
@@ -76,6 +85,8 @@ public class ServerJDBC extends PostgreSQLJDBC{
         }
         return servers;
 	}
+
+	
 
 	
 }

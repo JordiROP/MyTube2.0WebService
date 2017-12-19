@@ -28,14 +28,14 @@ public class UserJDBC extends PostgreSQLJDBC{
             System.err.println("problem executing the query");
             closeConnection();
         }
-        return getNewstUseRID();
+        return getNewstUserID();
     }
     
     public UserBO getById(int id){
     	return selectQuery("id="+String.valueOf(id)).get(0);
     }
     
-    private int getNewstUseRID(){
+    private int getNewstUserID(){
     	int id = -1;
     	openConnection();
         Statement stmt;

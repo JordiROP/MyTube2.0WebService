@@ -16,4 +16,8 @@ public class ContentDAO {
 	public ContentBO getContentByID(int id){
 		return postgres.getByID(id);
 	}
+
+	public int insertNewCotent(ContentBO contentBO) {
+		return postgres.insert(contentBO);
+	}
 }

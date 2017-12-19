@@ -1,5 +1,7 @@
 package WebService.ApiService;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -11,6 +13,19 @@ import WebService.DAO.ServerDAO;
 
 public class Server {
 	ServerDAO serverDAO = new ServerDAO();
+	
+	
+	/**
+     * listAll the list of all servers.
+     */
+    @Path("/")
+    @GET
+    @Produces("application/json")
+    public List<ServerBO> getAllServers() {
+        return serverDAO.getAllServers();
+    }
+    
+    
 	/**
 	 * Shows the information of the server with ID serverId
 	 * @param serverID
