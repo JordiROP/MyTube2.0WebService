@@ -12,7 +12,7 @@ public class ContentBO implements Serializable{
     @Column(name = "description")
     String description;
     @Column(name = "user_id")
-    String uploader;
+    int uploader;
     @Column(name = "server_id")
     int serverId;
 
@@ -40,11 +40,11 @@ public class ContentBO implements Serializable{
         this.description = description;
     }
 
-    public String getUploader() {
+    public int getUploader() {
         return uploader;
     }
 
-    public void setUploader(String uploader) {
+    public void setUploader(int uploader) {
         this.uploader = uploader;
     }
 

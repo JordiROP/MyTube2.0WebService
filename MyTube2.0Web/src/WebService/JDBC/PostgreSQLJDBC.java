@@ -1,6 +1,7 @@
 package WebService.JDBC;
 
 
+import WebService.BO.ServerBO;
 import WebService.BO.UserBO;
 
 import java.sql.Connection;
@@ -14,7 +15,7 @@ public class PostgreSQLJDBC {
 
     public void openConnection() {
         try {
-            String dbURL = "jdbc:postgresql://localhost:5432/mytube2?user=postgres&password=postgres";
+            String dbURL = "jdbc:postgresql://localhost:5432/mytube2?user=postgres&password=1234";
             c = DriverManager.getConnection(dbURL);
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,7 +40,7 @@ public class PostgreSQLJDBC {
         Statement stmt;
         try {
             stmt = c.createStatement();
-            String sql = "INSERT INTO user (username, password) "
+            String sql = "INSERT INTO mytube_user (username, password) "
                     + "VALUES ('"+user.getUsername()+"', '"+user.getPassword()+"');";
             stmt.executeUpdate(sql);
             closeConnection();
@@ -73,4 +74,27 @@ public class PostgreSQLJDBC {
             return null;
         }
     }
+
+	public ServerBO getServerByID(String id) {
+		openConnection();
+        Statement stmt;
+        try {
+            stmt = c.createStatement();
+            String sql = "SELECT * FROM server WHERE id = "+id+";";
+            ResultSet rs =stmt.executeQuery(sql);
+            ServerBO serverBO = new ServerBO();
+            while (rs.next()) {
+                serverBO.setId(Integer.parseInt(rs.getString("id")));
+                serverBO.setHost(rs.getString("host"));
+                serverBO.setPort(rs.getInt("port"));
+            }
+            closeConnection();
+            return serverBO;
+
+        } catch (SQLException e) {
+            System.err.println("problem executing the query");
+            closeConnection();
+            return null;
+        }
+	}
 }

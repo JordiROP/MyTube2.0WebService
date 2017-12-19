@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 public class UserBO implements Serializable{
-     @Id
+    @Id
     private int id;
     @Column(name = "username")
     private String username;

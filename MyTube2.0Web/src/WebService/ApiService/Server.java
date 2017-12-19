@@ -6,14 +6,21 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import WebService.BO.ServerBO;
+import WebService.DAO.ServerDAO;
+
 public class Server {
+	ServerDAO serverDAO = new ServerDAO();
+	/**
+	 * Shows the information of the server with ID serverId
+	 * @param serverID
+	 * @return the ServerBO object that corresponds to serverID
+	 */
     @Path("/server/{serverID}")
     @GET
-    //Si volem XML tmb es pot
     @Produces(MediaType.APPLICATION_JSON)
-    public String getServerInfo(@PathParam("serverID") String serverID){
-        //Show the information of the server with ID serverId
-        return null;
+    public ServerBO getServerInfo(@PathParam("serverID") String serverID){
+        return serverDAO.getServerByID(serverID);
     }
 
     @Path("/server/{serverID}/{content}")

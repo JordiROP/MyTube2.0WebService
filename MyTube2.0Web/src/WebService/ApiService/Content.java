@@ -1,20 +1,33 @@
 package WebService.ApiService;
 
-import WebService.RestBean.BeanJson;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.*;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import WebService.BO.ContentBO;
+import WebService.DAO.ContentDAO;
+import WebService.RestBean.BeanJson;
+
+@Path("/content")
 public class Content {
-    @Path("/content")
+	
+	ContentDAO contentDAO = new ContentDAO();
+    @Path("/")
     @GET
-    //Si volem XML tmb es pot
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getSearchContent(){
-        return null;
+    @Produces("application/json")
+    public List<ContentBO> getListOfContents(){
+        return contentDAO.getListOfContents();
     }
 
     @Path("/content")
@@ -27,8 +40,20 @@ public class Content {
 
     @Path("/content/{contentID}")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getSearchContentByID(@PathParam("contentID") String contentID){
+    @Produces("application/json")
+    public ContentBO getSearchContentByID(@PathParam("contentID") int contentID){
+        return contentDAO.getContentByID(contentID);
+    }
+    
+    /**
+     * Returns the list of contents of this user.
+     * @param userID
+     * @return
+     */
+    @Path("/{userID}/contents")
+    @GET
+    @Produces("application/json")
+    public List<ContentBO> getcontentsFromUser(@PathParam("userID") String userID) {
         return null;
     }
 

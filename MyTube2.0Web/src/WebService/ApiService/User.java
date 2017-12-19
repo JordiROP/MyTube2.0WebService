@@ -16,6 +16,11 @@ public class User{
     private static final String SUCCESS_RESULT="{ \"result\": \"succes\" }";
     private static final String FAILURE_RESULT="{ \"result\": \"failure\" }";
 
+    /**
+     * Add new user to the DB
+     * @param userBo the new user to add
+     * @return result
+     */
     @Path("/new")
     @POST
     public String signUser(UserBO userBo) {
@@ -26,20 +31,16 @@ public class User{
         return FAILURE_RESULT;
     }
 
-    @Path("/{userID}/content")
-    @GET
-    //Si volem XML tmb es pot
-    @Produces(MediaType.APPLICATION_JSON)
-    public String contentFromUser(@PathParam("userID") String userID) {
-        return null;
-    }
-
+    /**
+     * get the information of the user by the userID.
+     * @param userID
+     * @return the user who has the userID param.
+     */
     @Path("/{userID}")
     @GET
-    //Si volem XML tmb es pot
-    @Produces(MediaType.APPLICATION_JSON)
-    public String showUserInformation(@PathParam("userID") String userID) {
-        UserBO userbo = userDao.getUserById(Integer.parseInt(userID));
-        return userbo.getUsername();
+    @Produces("application/json")
+    public UserBO getUserInformation(@PathParam("userID") String userID) {
+        UserBO userBo = userDao.getUserById(Integer.parseInt(userID));
+        return userBo;
     }
 }
