@@ -14,12 +14,12 @@ public class ContentJDBC extends PostgreSQLJDBC{
 		return 1;
 	}
 	
-	public List<ContentBO> getAllContents() {
+	public List<ContentBO> getAll() {
 		return selectQuery();
 		
 	}
 	
-	public ContentBO getContentd(int id) {
+	public ContentBO getByID(int id) {
 		return selectQuery("id="+String.valueOf(id)).get(0);
 	}
 	

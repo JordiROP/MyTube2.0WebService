@@ -10,11 +10,10 @@ public class ContentDAO {
 	ContentJDBC postgres = new ContentJDBC();
 		
 	public List<ContentBO> getListOfContents() {
-		return postgres.getAllContents();
-		
+		return postgres.getAll();	
 	}
 	
 	public ContentBO getContentByID(int id){
-		return postgres.getContentd(id);
+		return postgres.getByID(id);
 	}
 }

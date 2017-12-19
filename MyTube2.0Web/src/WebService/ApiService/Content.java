@@ -12,7 +12,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import WebService.BO.ContentBO;
@@ -60,7 +59,7 @@ public class Content {
     @Path("/{contentID}/server")
     @GET
     //Si volem XML tmb es pot
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces("application/json")
     public String getAllContent(@PathParam("contentID") String contentID){
 
         return null;
@@ -68,10 +67,11 @@ public class Content {
 
     @Path("/content/{contentID}/download")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces("application/json")
     public String downloadContent(@PathParam("contentID") String contentID){
         return null;
     }
+    
     @Path("/content/{contentID}")
     @PUT
     public Response updateContent(@FormParam("userID") String userID, @Context HttpServletResponse servletResponse){

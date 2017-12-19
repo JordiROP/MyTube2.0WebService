@@ -13,6 +13,44 @@ public class ServerJDBC extends PostgreSQLJDBC{
     	return selectQuery("id="+String.valueOf(id)).get(0);
     }
 	
+	public int insert(ServerBO serverBO) {
+		openConnection();
+        Statement stmt;
+        try {
+            stmt = c.createStatement();
+            String sql = "INSERT INTO server (host, port) "
+                    + "VALUES ('"+serverBO.getHost()+"', '"+serverBO.getPort()+"');";
+            stmt.executeUpdate(sql);
+            			
+            closeConnection();
+        } catch (SQLException e) {
+            System.err.println("problem executing the query");
+            closeConnection();
+        }
+        return getNewstUseRID();
+	}
+	
+	private int getNewstUseRID(){
+    	int id = -1;
+    	openConnection();
+        Statement stmt;
+        try {
+        	stmt = c.createStatement();
+        	String sql = "SELECT timestamp,server_id from server order by timestamp desc limit 1";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+            	id = rs.getInt("server_id");
+            }
+            closeConnection();
+            
+
+        } catch (SQLException e) {
+            System.err.println("problem executing the query");
+            closeConnection();
+        }
+        return id;
+    }
+	
 	private List<ServerBO> selectQuery(String whereConditions) {
 		openConnection();
         Statement stmt;
@@ -38,4 +76,6 @@ public class ServerJDBC extends PostgreSQLJDBC{
         }
         return servers;
 	}
+
+	
 }

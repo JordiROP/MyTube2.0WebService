@@ -10,12 +10,16 @@ import WebService.BO.UserBO;
 
 public class UserJDBC extends PostgreSQLJDBC{
 
+	public List<UserBO> getAll() {
+		return selectQuery();
+	}
+	
 	public int insert(UserBO user){
     	openConnection();
         Statement stmt;
         try {
             stmt = c.createStatement();
-            String sql = "INSERT INTO user (username, password) "
+            String sql = "INSERT INTO mytube_user (username, password) "
                     + "VALUES ('"+user.getUsername()+"', '"+user.getPassword()+"');";
             stmt.executeUpdate(sql);
             			
@@ -40,7 +44,7 @@ public class UserJDBC extends PostgreSQLJDBC{
         	String sql = "SELECT timestamp,user_id from mytube_user order by timestamp desc limit 1";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-            	id = rs.getInt("id");
+            	id = rs.getInt("user_id");
             }
             closeConnection();
             
@@ -50,6 +54,10 @@ public class UserJDBC extends PostgreSQLJDBC{
             closeConnection();
         }
         return id;
+    }
+    
+    private List<UserBO> selectQuery(){
+    	return selectQuery("1=1");
     }
     
     private List<UserBO> selectQuery(String whereConditions) {
@@ -77,4 +85,6 @@ public class UserJDBC extends PostgreSQLJDBC{
         }
         return users;
 	}
+
+	
 }

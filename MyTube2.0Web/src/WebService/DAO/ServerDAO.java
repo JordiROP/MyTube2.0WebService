@@ -10,4 +10,8 @@ public class ServerDAO {
 	public ServerBO getServerByID(int serverID) {
 		return postgres.getById(serverID);
 	}
+
+	public int insertNewServer(ServerBO serverBO) {
+		return postgres.insert(serverBO);
+	}
 }
