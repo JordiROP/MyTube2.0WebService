@@ -10,7 +10,7 @@ public class PostgreSQLJDBC {
 
     protected void openConnection() {
         try {
-            String dbURL = "jdbc:postgresql://localhost:5432/mytube2?user=postgres&password=postgres";
+            String dbURL = "jdbc:postgresql://localhost:5432/mytube2?user=postgres&password=1234";
             c = DriverManager.getConnection(dbURL);
         } catch (Exception e) {
             e.printStackTrace();

@@ -6,13 +6,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.core.Response;
+
 import WebService.BO.ContentBO;
 
 public class ContentJDBC extends PostgreSQLJDBC{
-	
-	public int insert(){
-		return 1;
-	}
 	
 	public List<ContentBO> getAll() {
 		return selectQuery();
@@ -21,6 +19,14 @@ public class ContentJDBC extends PostgreSQLJDBC{
 	
 	public ContentBO getByID(int id) {
 		return selectQuery("id="+String.valueOf(id)).get(0);
+	}
+	
+	public List<ContentBO> getByUserID(int id) {
+		return selectQuery("user_id="+String.valueOf(id));
+	}
+	
+	public int deleteByID(int contentID) {
+		return deleteQuery("id="+String.valueOf(contentID));
 	}
 	
 	private List<ContentBO> selectQuery() {
@@ -70,6 +76,23 @@ public class ContentJDBC extends PostgreSQLJDBC{
         }
         return contents;
 	}
+	
+	private int deleteQuery(String whereConditions){
+		openConnection();
+        Statement stmt;
+        try {
+            stmt = c.createStatement();
+            String sql = "DELETE FROM mytube_content WHERE "+whereConditions+";";
+            ResultSet rs =stmt.executeQuery(sql);
+            closeConnection();
+
+        } catch (SQLException e) {
+            System.err.println("problem executing the query");
+            closeConnection();
+            return -1;
+        }
+        return 1;
+	}
 
 	private int getNewstContentID(){
     	int id = -1;
@@ -91,6 +114,8 @@ public class ContentJDBC extends PostgreSQLJDBC{
         }
         return id;
     }
+
+	
 
 	
 }

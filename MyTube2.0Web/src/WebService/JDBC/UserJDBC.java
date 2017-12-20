@@ -41,10 +41,10 @@ public class UserJDBC extends PostgreSQLJDBC{
         Statement stmt;
         try {
         	stmt = c.createStatement();
-        	String sql = "SELECT timestamp,user_id from mytube_user order by timestamp desc limit 1";
+        	String sql = "SELECT timestamp,id from mytube_user order by timestamp desc limit 1";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-            	id = rs.getInt("user_id");
+            	id = rs.getInt("id");
             }
             closeConnection();
             

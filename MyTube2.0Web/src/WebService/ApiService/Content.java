@@ -15,7 +15,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import WebService.BO.ContentBO;
-import WebService.BO.UserBO;
 import WebService.DAO.ContentDAO;
 
 @Path("/content")
@@ -41,7 +40,7 @@ public class Content {
          return result;
     }
 
-    @Path("/content/{contentID}")
+    @Path("/{contentID}")
     @GET
     @Produces("application/json")
     public ContentBO getSearchContentByID(@PathParam("contentID") int contentID){
@@ -53,40 +52,23 @@ public class Content {
      * @param userID
      * @return
      */
-    @Path("/content/{userID}")
+    @Path("/user/{userID}")
     @GET
     @Produces("application/json")
-    public List<ContentBO> getcontentsFromUser(@PathParam("userID") String userID) {
-        return null;
+    public List<ContentBO> getcontentsFromUser(@PathParam("userID") int userID) {
+        return contentDAO.getContentByUserID(userID);
     }
     
-    @Path("/{contentID}/server")
-    @GET
-    //Si volem XML tmb es pot
-    @Produces("application/json")
-    public String getAllContent(@PathParam("contentID") String contentID){
-
-        return null;
-    }
-
-    @Path("/content/{contentID}/download")
-    @GET
-    @Produces("application/json")
-    public String downloadContent(@PathParam("contentID") String contentID){
-        return null;
-    }
-    
-    @Path("/content/{contentID}")
+    @Path("/{contentID}")
     @PUT
     public Response updateContent(@FormParam("userID") String userID, @Context HttpServletResponse servletResponse){
         /*EXEMPLE ----> https://www.tutorialspoint.com/restful/restful_methods.htm */
         return null;
     }
 
-    @Path("/content/{contentID}")
+    @Path("/{contentID}")
     @DELETE
-    public Response deleteContent(@PathParam("contentID") String userID){
-        /*EXEMPLE ----> https://www.tutorialspoint.com/restful/restful_methods.htm */
-        return null;
+    public int deleteContent(@PathParam("contentID") int contentID){
+        return contentDAO.deleteByID(contentID);
     }
 }
