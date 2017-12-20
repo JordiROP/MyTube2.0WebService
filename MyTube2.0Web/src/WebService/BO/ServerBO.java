@@ -12,7 +12,11 @@ import java.io.Serializable;
 @Table(name = "server")
 
 public class ServerBO implements Serializable{
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4483641237909797884L;
+	@Id
     int id;
     @Column(name = "port")
     int port;

@@ -5,7 +5,11 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 public class ContentBO implements Serializable{
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1943877900492429015L;
+	@Id
     int id;
     @Column(name = "title")
     String title;

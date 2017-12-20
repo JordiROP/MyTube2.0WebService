@@ -5,7 +5,11 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 public class UserBO implements Serializable{
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2238320726621857716L;
+	@Id
     private int id;
     @Column(name = "username")
     private String username;
