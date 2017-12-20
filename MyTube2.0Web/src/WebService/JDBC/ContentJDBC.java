@@ -29,6 +29,18 @@ public class ContentJDBC extends PostgreSQLJDBC{
 		return deleteQuery("id="+String.valueOf(contentID));
 	}
 	
+	public int updateByID(int id, ContentBO contentBO) {
+		String set = "";
+		if(contentBO.getTitle()!= null && !contentBO.getTitle().equals("")){
+			set += "title="+contentBO.getTitle();
+		}
+		if(contentBO.getDescription()!= null && !contentBO.getDescription().equals("")){
+			set += "title="+contentBO.getDescription();
+		}
+		return updateQuery("id="+id,set );
+	}
+	
+
 	private List<ContentBO> selectQuery() {
 		return selectQuery("1=1");
 	}
@@ -93,6 +105,24 @@ public class ContentJDBC extends PostgreSQLJDBC{
         }
         return 1;
 	}
+	
+	private int updateQuery(String where, String set) {
+		openConnection();
+        Statement stmt;
+        try {
+            stmt = c.createStatement();
+            String sql = "UPDATE mytube_content SET "+ set + " WHERE "+where+";";
+            ResultSet rs =stmt.executeQuery(sql);
+            closeConnection();
+
+        } catch (SQLException e) {
+            System.err.println("problem executing the query");
+            closeConnection();
+            return -1;
+        }
+        return 1;
+	}
+	
 
 	private int getNewstContentID(){
     	int id = -1;
@@ -114,6 +144,8 @@ public class ContentJDBC extends PostgreSQLJDBC{
         }
         return id;
     }
+
+	
 
 	
 

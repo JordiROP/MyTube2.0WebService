@@ -2,8 +2,6 @@ package WebService.DAO;
 
 import java.util.List;
 
-import javax.ws.rs.core.Response;
-
 import WebService.BO.ContentBO;
 import WebService.JDBC.ContentJDBC;
 
@@ -30,4 +28,8 @@ public class ContentDAO {
 	public int deleteByID(int contentID) {
 		return postgres.deleteByID(contentID);
 	}
+
+	public int updateContent(int userID, ContentBO contentBO) {
+		return postgres.updateByID(userID, contentBO)
+;	}
 }

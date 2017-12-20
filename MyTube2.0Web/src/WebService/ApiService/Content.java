@@ -2,17 +2,13 @@ package WebService.ApiService;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 
 import WebService.BO.ContentBO;
 import WebService.DAO.ContentDAO;
@@ -61,9 +57,8 @@ public class Content {
     
     @Path("/{contentID}")
     @PUT
-    public Response updateContent(@FormParam("userID") String userID, @Context HttpServletResponse servletResponse){
-        /*EXEMPLE ----> https://www.tutorialspoint.com/restful/restful_methods.htm */
-        return null;
+    public int updateContent(@PathParam("userID") int userID, ContentBO contentBO){
+        return contentDAO.updateContent(userID, contentBO);
     }
 
     @Path("/{contentID}")
