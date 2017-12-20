@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import WebService.BO.ServerBO;
 import WebService.DAO.ServerDAO;
 
+@Path("/server")
 public class Server {
 	ServerDAO serverDAO = new ServerDAO();
 	
