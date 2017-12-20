@@ -20,4 +20,8 @@ public class UserDAO {
 	public List<UserBO> getAllUsers() {
 		return postgres.getAll();
 	}
+
+	public List<UserBO> getUsersByName(String name) {
+		return postgres.getUsersByName(name);
+	}
 }

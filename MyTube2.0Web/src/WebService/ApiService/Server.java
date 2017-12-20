@@ -25,6 +25,17 @@ public class Server {
         return serverDAO.getAllServers();
     }
     
+    /**
+     * Add new server to the DB
+     * @param serverBo the new server to add
+     * @return result-> the ID of the new Server
+     */
+    @Path("/new")
+    @POST
+    public int connectNewServer(ServerBO serverBO){
+    	int result = serverDAO.insertNewServer(serverBO);
+        return result;
+    }
     
 	/**
 	 * Shows the information of the server with ID serverId
@@ -38,15 +49,5 @@ public class Server {
         return serverDAO.getServerByID(serverID);
     }
 
-    /**
-     * Add new server to the DB
-     * @param serverBo the new server to add
-     * @return result-> the ID of the new Server
-     */
-    @Path("/new")
-    @POST
-    public int connectNewServer(ServerBO serverBO){
-    	int result = serverDAO.insertNewServer(serverBO);
-        return result;
-    }
+   
 }

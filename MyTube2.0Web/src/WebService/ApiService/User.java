@@ -35,8 +35,7 @@ public class User{
     @Path("/new")
     @POST
     public int signUser(UserBO userBo) {
-        int result = userDao.insertNewUser(userBo);
-        return result;
+        return userDao.insertNewUser(userBo);
     }
 
     /**
@@ -47,9 +46,20 @@ public class User{
     @Path("/{userID}")
     @GET
     @Produces("application/json")
-    public UserBO getUserInformation(@PathParam("userID") String userID) {
-        UserBO userBo = userDao.getUserById(Integer.parseInt(userID));
-        return userBo;
+    public UserBO getUserInformationByID(@PathParam("userID") int userID) {
+        return userDao.getUserById(userID);
+    }
+    
+    /**
+     * get the information of the user by the userID.
+     * @param userID
+     * @return the user who has the userID param.
+     */
+    @Path("/name/{name}")
+    @GET
+    @Produces("application/json")
+    public List<UserBO> getUsersWithName(@PathParam("name") String name) {
+        return userDao.getUsersByName(name);
     }
     
     

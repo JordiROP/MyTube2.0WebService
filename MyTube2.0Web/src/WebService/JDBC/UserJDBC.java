@@ -14,6 +14,10 @@ public class UserJDBC extends PostgreSQLJDBC{
 		return selectQuery();
 	}
 	
+	public List<UserBO> getUsersByName(String name) {
+		return selectQuery("name="+name);
+	}
+	
 	public int insert(UserBO user){
     	openConnection();
         Statement stmt;
@@ -84,7 +88,5 @@ public class UserJDBC extends PostgreSQLJDBC{
             closeConnection();
         }
         return users;
-	}
-
-	
+	}	
 }
