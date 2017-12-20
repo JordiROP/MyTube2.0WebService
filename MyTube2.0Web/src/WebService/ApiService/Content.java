@@ -15,6 +15,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import WebService.BO.ContentBO;
+import WebService.BO.UserBO;
 import WebService.DAO.ContentDAO;
 
 @Path("/content")
@@ -27,8 +28,13 @@ public class Content {
     public List<ContentBO> getListOfContents(){
         return contentDAO.getListOfContents();
     }
-
-    @Path("/content")
+    
+    /**
+     * Add new content to the DB
+     * @param userBo the new content to add
+     * @return result - > the ID of the new content
+     */
+    @Path("/new")
     @POST
     public int uploadContent(ContentBO contentBO){
     	 int result = contentDAO.insertNewCotent(contentBO);
