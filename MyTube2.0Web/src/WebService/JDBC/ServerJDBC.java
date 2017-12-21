@@ -18,6 +18,10 @@ public class ServerJDBC extends PostgreSQLJDBC{
     	return selectQuery("id="+String.valueOf(id)).get(0);
     }
 	
+	public ServerBO getByHostAndPort(String host, String port) {
+		return selectQuery("host='"+host+"' AND port='"+port+"'").get(0);
+	}
+	
 	public int insert(ServerBO serverBO) {
 		openConnection();
         Statement stmt;
@@ -68,6 +72,5 @@ public class ServerJDBC extends PostgreSQLJDBC{
 	}
 
 	
-
 	
 }

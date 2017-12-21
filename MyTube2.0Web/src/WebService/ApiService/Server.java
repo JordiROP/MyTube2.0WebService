@@ -48,11 +48,23 @@ public class Server {
 	 * @param serverID
 	 * @return the ServerBO object that corresponds to serverID
 	 */
-    @Path("/server/{serverID}")
+    @Path("/{serverID}")
     @GET
     @Produces("application/json")
     public ServerBO getServerInfo(@PathParam("serverID") int serverID){
         return serverDAO.getServerByID(serverID);
+    }
+    
+    /**
+	 * Shows the information of the server with ID serverId
+	 * @param serverID
+	 * @return the ServerBO object that corresponds to serverID
+	 */
+    @Path("/host/{host}/port/{port}")
+    @GET
+    @Produces("application/json")
+    public ServerBO getServerInfo(@PathParam("host") String host, @PathParam("port") String port){
+        return serverDAO.getServerByHostPort(host, port);
     }
 
    

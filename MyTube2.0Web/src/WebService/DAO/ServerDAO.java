@@ -20,4 +20,8 @@ public class ServerDAO {
 	public List<ServerBO> getAllServers() {
 		return postgres.getAll();
 	}
+
+	public ServerBO getServerByHostPort(String host, String port) {
+		return postgres.getByHostAndPort(host, port);
+	}
 }
