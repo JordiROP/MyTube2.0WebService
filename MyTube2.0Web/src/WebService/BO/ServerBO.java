@@ -22,6 +22,8 @@ public class ServerBO implements Serializable{
     int port;
     @Column(name = "host")
     String host;
+    @Column(name = "on")
+    Boolean on;
 
     public int getId() {
         return id;
@@ -45,5 +47,13 @@ public class ServerBO implements Serializable{
 
     public void setHost(String host) {
         this.host = host;
+    }
+    
+    public Boolean getOn(){
+    	return on;
+    }
+    
+    public void setOn(Boolean on){
+    	this.on=on;
     }
 }
