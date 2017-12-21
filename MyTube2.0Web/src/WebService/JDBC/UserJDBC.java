@@ -32,32 +32,11 @@ public class UserJDBC extends PostgreSQLJDBC{
             System.err.println("problem executing the query");
             closeConnection();
         }
-        return getNewstUserID();
+        return 1;
     }
     
     public UserBO getById(int id){
     	return selectQuery("id="+String.valueOf(id)).get(0);
-    }
-    
-    private int getNewstUserID(){
-    	int id = -1;
-    	openConnection();
-        Statement stmt;
-        try {
-        	stmt = c.createStatement();
-        	String sql = "SELECT timestamp,id from mytube_user order by timestamp desc limit 1";
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-            	id = rs.getInt("id");
-            }
-            closeConnection();
-            
-
-        } catch (SQLException e) {
-            System.err.println("problem executing the query");
-            closeConnection();
-        }
-        return id;
     }
     
     private List<UserBO> selectQuery(){
