@@ -53,7 +53,7 @@ public class ServerJDBC extends PostgreSQLJDBC{
             while (rs.next()) {
             	ServerBO serverBO = new ServerBO();
                 serverBO.setId(Integer.parseInt(rs.getString("id")));
-                serverBO.setHost(rs.getString("username"));
+                serverBO.setHost(rs.getString("host"));
                 serverBO.setPort(rs.getInt("port"));
                 servers.add(serverBO);
             }

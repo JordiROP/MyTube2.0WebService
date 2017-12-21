@@ -7,6 +7,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import WebService.BO.ServerBO;
 import WebService.DAO.ServerDAO;
@@ -33,9 +34,13 @@ public class Server {
      */
     @Path("/new")
     @POST
-    public int connectNewServer(ServerBO serverBO){
+    public Response connectNewServer(ServerBO serverBO){
     	int result = serverDAO.insertNewServer(serverBO);
-        return result;
+        if(result != -1){
+        	return Response.status(200).build();
+        }else{
+        	return Response.status(500).build();
+        }
     }
     
 	/**

@@ -15,7 +15,7 @@ public class UserJDBC extends PostgreSQLJDBC{
 	}
 	
 	public List<UserBO> getUsersByName(String name) {
-		return selectQuery("username="+name);
+		return selectQuery("username='"+name+"'");
 	}
 	
 	public int insert(UserBO user){
