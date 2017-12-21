@@ -9,6 +9,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import WebService.BO.ContentBO;
 import WebService.DAO.ContentDAO;
@@ -31,9 +32,14 @@ public class Content {
      */
     @Path("/new")
     @POST
-    public int uploadContent(ContentBO contentBO){
+    public Response uploadContent(ContentBO contentBO){
     	 int result = contentDAO.insertNewCotent(contentBO);
-         return result;
+         if(result != -1){
+        	 return Response.status(200).build();
+         }else{
+        	 return Response.status(500).build();
+         }
+         
     }
 
     @Path("/{contentID}")
@@ -55,15 +61,25 @@ public class Content {
         return contentDAO.getContentByUserID(userID);
     }
     
-    @Path("/{contentID}")
+    @Path("/{contentID}/{contentID}")
     @PUT
-    public int updateContent(@PathParam("userID") int userID, ContentBO contentBO){
-        return contentDAO.updateContent(userID, contentBO);
+    public Response updateContent(@PathParam("contentID") int userID, ContentBO contentBO){
+        int result = contentDAO.updateContent(userID, contentBO);
+        if(result != -1){
+       	 return Response.status(200).build();
+        }else{
+       	 return Response.status(500).build();
+        }
     }
 
     @Path("/{contentID}")
     @DELETE
-    public int deleteContent(@PathParam("contentID") int contentID){
-        return contentDAO.deleteByID(contentID);
+    public Response deleteContent(@PathParam("contentID") int contentID){
+        int result = contentDAO.deleteByID(contentID);
+        if(result != -1){
+          	 return Response.status(200).build();
+        }else{
+          	 return Response.status(500).build();
+        }
     }
 }
