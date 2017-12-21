@@ -58,8 +58,9 @@ public class ContentJDBC extends PostgreSQLJDBC{
         } catch (SQLException e) {
             System.err.println("problem executing the query");
             closeConnection();
+            return -1;
         }
-        return getNewstContentID();
+        return 1;
 	}
 
 
@@ -122,32 +123,5 @@ public class ContentJDBC extends PostgreSQLJDBC{
         }
         return 1;
 	}
-	
-
-	private int getNewstContentID(){
-    	int id = -1;
-    	openConnection();
-        Statement stmt;
-        try {
-        	stmt = c.createStatement();
-        	String sql = "SELECT timestamp,id FROM mytube_content order by timestamp desc limit 1";
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-            	id = rs.getInt("id");
-            }
-            closeConnection();
-            
-
-        } catch (SQLException e) {
-            System.err.println("problem executing the query");
-            closeConnection();
-        }
-        return id;
-    }
-
-	
-
-	
-
-	
+		
 }

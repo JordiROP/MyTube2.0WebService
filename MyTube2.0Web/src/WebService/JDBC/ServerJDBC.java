@@ -31,30 +31,11 @@ public class ServerJDBC extends PostgreSQLJDBC{
         } catch (SQLException e) {
             System.err.println("problem executing the query");
             closeConnection();
+            return -1;
         }
-        return getNewstUseRID();
+        return 1;
 	}
 	
-	private int getNewstUseRID(){
-    	int id = -1;
-    	openConnection();
-        Statement stmt;
-        try {
-        	stmt = c.createStatement();
-        	String sql = "SELECT timestamp,id from server order by timestamp desc limit 1";
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-            	id = rs.getInt("id");
-            }
-            closeConnection();
-            
-
-        } catch (SQLException e) {
-            System.err.println("problem executing the query");
-            closeConnection();
-        }
-        return id;
-    }
 	
 	private List<ServerBO> selectQuery(){
 		return selectQuery("1=1");

@@ -7,6 +7,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import WebService.BO.UserBO;
 import WebService.DAO.UserDAO;
@@ -34,8 +35,13 @@ public class User{
      */
     @Path("/new")
     @POST
-    public int signUser(UserBO userBo) {
-        return userDao.insertNewUser(userBo);
+    public Response signUser(UserBO userBo) {
+    	int response = userDao.insertNewUser(userBo);
+    	if(response != -1){
+    		return Response.status(200).build();
+    	}else{
+    		return Response.status(500).build();
+    	}
     }
 
     /**

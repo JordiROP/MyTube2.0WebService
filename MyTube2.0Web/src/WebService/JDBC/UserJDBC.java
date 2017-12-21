@@ -15,7 +15,7 @@ public class UserJDBC extends PostgreSQLJDBC{
 	}
 	
 	public List<UserBO> getUsersByName(String name) {
-		return selectQuery("name="+name);
+		return selectQuery("username="+name);
 	}
 	
 	public int insert(UserBO user){
@@ -31,6 +31,7 @@ public class UserJDBC extends PostgreSQLJDBC{
         } catch (SQLException e) {
             System.err.println("problem executing the query");
             closeConnection();
+            return -1;
         }
         return 1;
     }
