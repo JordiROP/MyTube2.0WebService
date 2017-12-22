@@ -32,10 +32,10 @@ public class ContentJDBC extends PostgreSQLJDBC{
 	public int updateByID(int id, ContentBO contentBO) {
 		String set = "";
 		if(contentBO.getTitle()!= null && !contentBO.getTitle().equals("")){
-			set += "title="+contentBO.getTitle();
+			set += "title='"+contentBO.getTitle()+"'";
 		}
 		if(contentBO.getDescription()!= null && !contentBO.getDescription().equals("")){
-			set += "title="+contentBO.getDescription();
+			set += ", description='"+contentBO.getDescription()+"'";
 		}
 		return updateQuery("id="+id,set );
 	}
@@ -51,7 +51,7 @@ public class ContentJDBC extends PostgreSQLJDBC{
         try {
             stmt = c.createStatement();
             String sql = "INSERT INTO mytube_content (title, description, user_id, server_id) "
-                    + "VALUES ('"+contentBO.getTitle()+"', '"+contentBO.getDescription()+"', '"+contentBO.getUploader()+"', '"+contentBO.getServerId()+"');";
+                    + "VALUES ('"+contentBO.getTitle()+"', '"+contentBO.getDescription()+"', "+contentBO.getUploader()+", "+contentBO.getServerId()+");";
             stmt.executeUpdate(sql);
             			
             closeConnection();

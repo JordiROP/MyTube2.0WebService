@@ -68,6 +68,9 @@ public class ServerJDBC extends PostgreSQLJDBC{
         } catch (SQLException e) {
             System.err.println("problem executing the query");
             closeConnection();
+        } catch(Exception e){
+        	System.err.println("problem executing the query");
+            closeConnection();
         }
         return servers;
 	}

@@ -61,10 +61,10 @@ public class Content {
         return contentDAO.getContentByUserID(userID);
     }
     
-    @Path("/{contentID}/{contentID}")
+    @Path("/{contentID}/")
     @PUT
-    public Response updateContent(@PathParam("contentID") int userID, ContentBO contentBO){
-        int result = contentDAO.updateContent(userID, contentBO);
+    public Response updateContent(@PathParam("contentID") int contentID, ContentBO contentBO){
+        int result = contentDAO.updateContent(contentID, contentBO);
         if(result != -1){
        	 return Response.status(200).build();
         }else{
